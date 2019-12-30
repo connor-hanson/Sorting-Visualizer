@@ -5,16 +5,19 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class Visualizer extends Application {
-	protected static final int WINDOW_WIDTH = 400;
-	protected static final int WINDOW_HEIGHT = 400;
-	private static final int NUM_RECTANGLES = 20;
+	protected static int WINDOW_WIDTH = 400;
+	protected static int WINDOW_HEIGHT = 400;
+	private static int NUM_RECTANGLES = 100;
 	private Stage stage;
 	private GraphicsContext gc;
 
@@ -54,6 +57,35 @@ public class Visualizer extends Application {
 			switchScene(quick);
 		});
 
+		VBox optionsBox = new VBox(10);
+
+		// let user choose number of rectangles to sort, defaults to 100
+		Label nRectangles = new Label("Input number of rectangles to sort");
+		TextField nInput = new TextField(); // change to slider?
+
+		Button confirm = new Button("Press to confirm");
+		confirm.setOnAction(e -> {
+			try {
+				int num = Integer.parseInt(nInput.getText());
+				if (num < 10 || num > WINDOW_HEIGHT || num > WINDOW_WIDTH) {
+					Alert al = new Alert(AlertType.WARNING);
+					al.setContentText(
+							"Cannot sort less than 10, or more than the window width ("
+									+ WINDOW_WIDTH
+									+ "), or more than the window height("
+									+ WINDOW_HEIGHT + ")");
+					al.showAndWait();
+				} else {
+					NUM_RECTANGLES = num;
+				}
+			} catch (NumberFormatException ex) {
+
+			}
+		});
+
+		optionsBox.getChildren().addAll(nRectangles, nInput, confirm);
+		bp.setRight(optionsBox);
+
 		selectionBox.getChildren().addAll(bubbleSort, selectionSort, quickSort);
 
 		bp.setCenter(selectionBox);
@@ -67,7 +99,7 @@ public class Visualizer extends Application {
 		Scene sortScene = new Scene(bp, WINDOW_WIDTH, WINDOW_HEIGHT);
 		Canvas canvas = new Canvas(WINDOW_WIDTH, WINDOW_HEIGHT);
 		this.gc = canvas.getGraphicsContext2D();
-		
+
 		Button back = new Button("Back");
 		back.setOnAction(e -> {
 			try {
@@ -86,20 +118,20 @@ public class Visualizer extends Application {
 		case "bubble":
 			startThread(new BubbleSort(rectangles));
 			break;
-			
+
 		case "quick":
 			startThread(new QuickSort(rectangles));
 			break;
-			
+
 		case "selection":
 			startThread(new SelectionSort(rectangles));
 			break;
 		}
-		
+
 		stage.setScene(sortScene);
 		stage.show();
 	}
-	
+
 	public void startThread(Runnable sort) {
 		Thread sortThread = new Thread(sort);
 		sortThread.setDaemon(true);
