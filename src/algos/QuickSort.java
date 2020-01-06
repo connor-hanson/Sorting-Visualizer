@@ -34,10 +34,10 @@ public class QuickSort implements Runnable {
 			if (r.get(j) <= pivot) {
 				i++;
 				r.swap(i, j);
-				delay(50);
+				delay(25);
 			}
 		}
-		delay(50);
+		delay(25);
 		r.swap(i + 1, hi);
 		return i + 1;
 	}

@@ -15,9 +15,9 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class Visualizer extends Application {
-	protected static int WINDOW_WIDTH = 400;
-	protected static int WINDOW_HEIGHT = 400;
-	private static int NUM_RECTANGLES = 100;
+	protected static int WINDOW_WIDTH = 1000;
+	protected static int WINDOW_HEIGHT = 800;
+	private static int NUM_RECTANGLES = 1000;
 	private Stage stage;
 	private GraphicsContext gc;
 
@@ -67,7 +67,7 @@ public class Visualizer extends Application {
 		confirm.setOnAction(e -> {
 			try {
 				int num = Integer.parseInt(nInput.getText());
-				if (num < 10 || num > WINDOW_HEIGHT || num > WINDOW_WIDTH) {
+				if (num < 10 || num > WINDOW_WIDTH) {
 					Alert al = new Alert(AlertType.WARNING);
 					al.setContentText(
 							"Cannot sort less than 10, or more than the window width ("

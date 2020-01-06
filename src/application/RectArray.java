@@ -75,8 +75,8 @@ public class RectArray {
 		Platform.runLater(() -> {
 			final int windowWidth = Visualizer.WINDOW_WIDTH;
 			final int windowHeight = Visualizer.WINDOW_HEIGHT;
-			final int rectWidth = windowWidth / size;
-			final int heightMult = windowHeight / size;
+			final double rectWidth = windowWidth / size;
+			final double heightMult = windowHeight / size;
 
 			gc.clearRect(0, 0, windowWidth, windowHeight);
 
@@ -86,7 +86,7 @@ public class RectArray {
 
 			for (int i = 0; i < size(); ++i) {
 				Rectangle r = array[i];
-				rectHeight = r.value * heightMult;
+				rectHeight = (int)(r.value * heightMult);
 				
 				//System.out.println(r.switched);
 				
