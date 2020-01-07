@@ -3,12 +3,10 @@ package algos;
 import application.RectArray;
 import javafx.application.Platform;
 
-public class BubbleSort implements Runnable {
-
-	private RectArray r;
+public class BubbleSort extends RunnableSort {
 
 	public BubbleSort(RectArray r) {
-		this.r = r;
+		super(r);
 	}
 
 	@Override
@@ -24,14 +22,6 @@ public class BubbleSort implements Runnable {
 			}
 		}
 		r.setSorted(true);
-	}
-	
-	private void delay(int millis) {
-		try {
-			Thread.sleep(millis);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
 	}
 
 }

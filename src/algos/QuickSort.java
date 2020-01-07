@@ -2,12 +2,10 @@ package algos;
 
 import application.RectArray;
 
-public class QuickSort implements Runnable {
-	
-	private RectArray r;
-	
+public class QuickSort extends RunnableSort {
+		
 	public QuickSort(RectArray r) {
-		this.r = r;
+		super(r);
 	}
 
 	@Override
@@ -42,13 +40,6 @@ public class QuickSort implements Runnable {
 		return i + 1;
 	}
 
-	private void delay(int millis) {
-		try {
-			Thread.sleep(millis);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-	}
 	
 	
 }

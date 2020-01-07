@@ -2,12 +2,12 @@ package algos;
 
 import application.RectArray;
 
-public class SelectionSort implements Runnable {
+public class SelectionSort extends RunnableSort {
 
-	private RectArray r;
+	//private RectArray r;
 	
 	public SelectionSort(RectArray r) {
-		this.r = r;
+		super(r);
 	}
 
 	@Override
@@ -25,14 +25,6 @@ public class SelectionSort implements Runnable {
 		}
 		
 		r.setSorted(true);
-	}
-	
-	private void delay(int millis) {
-		try {
-			Thread.sleep(millis);
-		} catch (InterruptedException e) {
-			
-		}
 	}
 
 }

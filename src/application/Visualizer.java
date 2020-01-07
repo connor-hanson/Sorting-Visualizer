@@ -15,9 +15,9 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class Visualizer extends Application {
-	protected static int WINDOW_WIDTH = 1000;
+	protected static int WINDOW_WIDTH = 800;
 	protected static int WINDOW_HEIGHT = 800;
-	private static int NUM_RECTANGLES = 1000;
+	private static int NUM_RECTANGLES = 800;
 	private Stage stage;
 	private GraphicsContext gc;
 
@@ -132,7 +132,7 @@ public class Visualizer extends Application {
 		stage.show();
 	}
 
-	public void startThread(Runnable sort) {
+	public void startThread(RunnableSort sort) {
 		Thread sortThread = new Thread(sort);
 		sortThread.setDaemon(true);
 		sortThread.start();
