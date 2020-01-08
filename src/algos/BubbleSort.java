@@ -14,7 +14,7 @@ public class BubbleSort extends RunnableSort {
 		for (int i = 0; i < r.size() - 1; ++i) {
 			for (int j = 0; j < r.size() - i - 1; ++j) {
 				
-				delay(10);
+				delay(50);
 
 				if (r.get(j) > r.get(j + 1)) {
 					r.swap(j, j + 1);
@@ -22,6 +22,7 @@ public class BubbleSort extends RunnableSort {
 			}
 		}
 		r.setSorted(true);
+		runSorted(50);
 	}
 
 }

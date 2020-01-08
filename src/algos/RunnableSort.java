@@ -23,4 +23,11 @@ public abstract class RunnableSort implements Runnable {
 		}
 	}
 	
+	protected void runSorted(int millis) {
+		for (int i = 0; i < r.size(); ++i) {
+			r.highlight(i);
+			delay(millis);
+		}
+	}
+	
 }

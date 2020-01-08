@@ -1,5 +1,11 @@
 package application;
 
+import javax.sound.midi.Instrument;
+import javax.sound.midi.MidiChannel;
+import javax.sound.midi.MidiSystem;
+import javax.sound.midi.MidiUnavailableException;
+import javax.sound.midi.Synthesizer;
+
 import algos.*;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -57,6 +63,17 @@ public class Visualizer extends Application {
 			switchScene(quick);
 		});
 
+		Button radixSort = new Button("Radix Sort");
+		radixSort.setOnAction(e -> {
+			String radix = "radix";
+			switchScene(radix);
+		});
+
+		Button testMidi = new Button("Test MIDI");
+		testMidi.setOnAction(e -> {
+			testMidi();
+		});
+
 		VBox optionsBox = new VBox(10);
 
 		// let user choose number of rectangles to sort, defaults to 100
@@ -86,7 +103,8 @@ public class Visualizer extends Application {
 		optionsBox.getChildren().addAll(nRectangles, nInput, confirm);
 		bp.setRight(optionsBox);
 
-		selectionBox.getChildren().addAll(bubbleSort, selectionSort, quickSort);
+		selectionBox.getChildren().addAll(bubbleSort, selectionSort, quickSort,
+				radixSort, testMidi);
 
 		bp.setCenter(selectionBox);
 
@@ -126,6 +144,10 @@ public class Visualizer extends Application {
 		case "selection":
 			startThread(new SelectionSort(rectangles));
 			break;
+
+		case "radix":
+			startThread(new RadixSort(rectangles));
+			break;
 		}
 
 		stage.setScene(sortScene);
@@ -136,6 +158,34 @@ public class Visualizer extends Application {
 		Thread sortThread = new Thread(sort);
 		sortThread.setDaemon(true);
 		sortThread.start();
+	}
+
+	private void setupMidi() {
+		try {
+			Synthesizer synth = MidiSystem.getSynthesizer();
+			synth.open();
+			final MidiChannel[] mc = synth.getChannels();
+			Instrument[] inst = synth.getDefaultSoundbank().getInstruments();
+			synth.loadInstrument(inst[0]);
+		} catch (MidiUnavailableException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	private void testMidi() {
+		try {
+			Synthesizer synth = MidiSystem.getSynthesizer();
+			synth.open();
+			final MidiChannel[] mc = synth.getChannels();
+			Instrument[] inst = synth.getDefaultSoundbank().getInstruments();
+			synth.loadInstrument(inst[0]);
+			mc[0].noteOn(60, 600);
+		} catch (MidiUnavailableException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 	}
 
 }

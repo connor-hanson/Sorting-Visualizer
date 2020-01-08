@@ -12,6 +12,7 @@ public class QuickSort extends RunnableSort {
 	public void run() {
 		quickSort(0, r.size() - 1, r);
 		r.setSorted(true);
+		runSorted(25);
 	}
 	
 	private void quickSort(int lo, int hi, RectArray r) {

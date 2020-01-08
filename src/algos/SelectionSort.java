@@ -25,6 +25,7 @@ public class SelectionSort extends RunnableSort {
 		}
 		
 		r.setSorted(true);
+		runSorted(100);
 	}
 
 }
