@@ -6,8 +6,12 @@ import java.util.LinkedList;
 import application.RectArray;
 import application.RectArray.Rectangle;
 
-// take the array, put it into buckets 0-9 n times, 
-// where n is the amount of digits in the largest value
+/* 
+ * Take the array, put it into buckets 0-9 n times, 
+ * where n is the amount of digits in the largest value. 
+ * 
+ * Extends RunnableSort, inherits basic functions and can be used as a Runnable
+ */
 public class RadixSort extends RunnableSort {
 
 	public RadixSort(RectArray r) {
@@ -16,16 +20,15 @@ public class RadixSort extends RunnableSort {
 
 	@Override
 	public void run() {
-
-		int degree = findDegree();
 		// start with LSD, go to MSD
-		LinkedList<Rectangle>[] buckets = new LinkedList[10]; // have to have a
-																// warning
+		int degree = findDegree();
+
+		// have to have a warning but it seems to work without issues
+		LinkedList<Rectangle>[] buckets = new LinkedList[10];
 
 		// do this for each power of 10
 		for (int i = 1; i < degree; i *= 10) {
 
-			//System.out.println("N");
 			// initialize lists
 			for (int k = 0; k < 10; ++k) {
 				buckets[k] = new LinkedList<>();
@@ -68,7 +71,7 @@ public class RadixSort extends RunnableSort {
 					break;
 				}
 			}
-			
+
 			// now put back into the array
 			int count = 0;
 			// for each bucket

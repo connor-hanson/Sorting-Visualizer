@@ -23,6 +23,7 @@ public abstract class RunnableSort implements Runnable {
 		}
 	}
 	
+	// play all of them again once the array is sorted
 	protected void runSorted(int millis) {
 		for (int i = 0; i < r.size(); ++i) {
 			r.highlight(i);

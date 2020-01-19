@@ -20,10 +20,17 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+/*
+ * File name: Visualizer.java
+ * Project: Sorting Visualizer
+ * Author: Connor Hanson
+ * 
+ * This class displays most of the GUI and handles the threading
+ */
 public class Visualizer extends Application {
-	protected static int WINDOW_WIDTH = 800;
-	protected static int WINDOW_HEIGHT = 800;
-	private static int NUM_RECTANGLES = 800;
+	protected static int WINDOW_WIDTH = 500;
+	protected static int WINDOW_HEIGHT = 500;
+	private static int NUM_RECTANGLES = 250;
 	private Stage stage;
 	private GraphicsContext gc;
 
